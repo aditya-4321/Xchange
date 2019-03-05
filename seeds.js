@@ -7,6 +7,7 @@ var data=[
          img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiihyl6VClvNtWyHssvJP226TfKWI5HAL6J1uu78kaOQVNTdX8",
          title: "smartphone",
          desp: "If your mind is full of horseshit,it will aggravate your situation",
+<<<<<<< HEAD
          price: 20
     }, 
     {
@@ -39,6 +40,40 @@ var data=[
           desp: "Samsung 24K4100 59 cm (24 inches) HD Ready LED TV (Black",
           price: 20
      }
+=======
+         price: "20k$"
+    }, 
+    {
+         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiihyl6VClvNtWyHssvJP226TfKWI5HAL6J1uu78kaOQVNTdX8",
+         title: "smartphone",
+         desp: "If your mind is full of horseshit,it will aggravate your situation",
+         price: "20k$"
+    },
+    {
+         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiihyl6VClvNtWyHssvJP226TfKWI5HAL6J1uu78kaOQVNTdX8",
+         title: "smartphone",
+         desp: "If your mind is full of horseshit,it will aggravate your situation",
+         price: "20k$"
+    },  
+    {
+         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiihyl6VClvNtWyHssvJP226TfKWI5HAL6J1uu78kaOQVNTdX8",
+         title: "smartphone",
+         desp: "If your mind is full of horseshit,it will aggravate your situation",
+         price: "20k$"
+    },
+    {
+         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiihyl6VClvNtWyHssvJP226TfKWI5HAL6J1uu78kaOQVNTdX8",
+         title: "smartphone",
+         desp: "If your mind is full of horseshit,it will aggravate your situation",
+         price: "20k$"
+    },
+    {
+         img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiihyl6VClvNtWyHssvJP226TfKWI5HAL6J1uu78kaOQVNTdX8",
+         title: "smartphone",
+         desp: "If your mind is full of horseshit,it will aggravate your situation",
+         price: "20k$"
+    }
+>>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
 ]
  
 function seedDB(){

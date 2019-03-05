@@ -3,6 +3,7 @@ var express = require("express"),
     bodyParser = require("body-parser"),
     mongoose =  require("mongoose"),
     seedDB= require("./seeds"),
+<<<<<<< HEAD
     cookieParser = require('cookie-parser'),
     session=require("express-session"),
     Mongostore=require("connect-mongo")(session),
@@ -13,6 +14,13 @@ var express = require("express"),
     passportLocalMongoose=require("passport-local-mongoose"),
     Cart= require("./models/cart")
     
+=======
+    product=require("./models/products"),
+    user=require("./models/User"),
+    passport=require("passport"),
+    LocalStrategy=require("passport-local"),
+    passportLocalMongoose=require("passport-local-mongoose")
+>>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
     
     
 mongoose.connect("mongodb://localhost/x_change");
@@ -21,6 +29,7 @@ app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 
 //Passport Configuration
+<<<<<<< HEAD
 app.use(cookieParser())
 app.use(session({
     secret: "KBC means Kaun Banega Crorepati",
@@ -39,6 +48,17 @@ app.use(function(req, res, next){
     next();
 })
 
+=======
+
+app.use(require("express-session")({
+    secret: "KBC means Kaun Banega Crorepati",
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(user.authenticate()))
+>>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 
@@ -57,6 +77,7 @@ app.get("/products",function(req, res){
         if(err){
             console.log(err);
         }
+<<<<<<< HEAD
         console.log(allproducts);
         var productgrp=[];
         var productcount=4;
@@ -69,10 +90,15 @@ app.get("/products",function(req, res){
         }
         
           res.render("index",{allproducts:productgrp})
+=======
+        console.log("It worked");
+         res.render("index",{allproducts:allproducts});
+>>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
     })
    
  })
 
+<<<<<<< HEAD
 app.post("/products",function(req, res){
     var title=req.body.title;
     var image=req.body.image;
@@ -138,6 +164,9 @@ app.get("/checkout",function(req, res){
     
  
 })
+=======
+
+>>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
 
 
 
@@ -167,6 +196,7 @@ app.post("/register",function(req , res){
      })
 })
 
+<<<<<<< HEAD
 //store routes
 
 
@@ -190,6 +220,8 @@ app.get("/global",function(req, res){
    res.render("global")
 })
 
+=======
+>>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
 //login
 //Auth routes Login
 app.get("/Login",function(req, res){
@@ -207,8 +239,11 @@ app.post("/Login",passport.authenticate("local",{
 
 app.get("/Logout",function(req, res){
     req.logout();
+<<<<<<< HEAD
     
     req.session.cart=null;
+=======
+>>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
     res.redirect("/products");
 })
 
@@ -218,7 +253,12 @@ app.get("/Logout",function(req, res){
 
 
 
+<<<<<<< HEAD
 //Server Hosting
+=======
+
+
+>>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
 
 
 app.listen(process.env.PORT,process.env.IP,function(){
