@@ -1,0 +1,72 @@
+	<% include partials/header %> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<div style="text-align:center">
+			<h1 id="title">Transactions</h1>
+	
+	<h3 id="description">Total:<%= total %>
+	</h3>
+</div>
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-md-offset-4 col-sm-offser-3">
+      <h1>Checkout</h1>
+      <h4>Total</h4>
+      <form action="/" method="GET" id="checkout-form">
+        <div class="row">
+        <div class="col-xs-12">
+           <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" required>
+           </div>
+         </div>
+           <div class="col-xs-12">
+           <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" class="form-control" required>
+           </div>
+      </div>
+      <hr>
+        
+        <div class="col-xs-12">
+           <div class="form-group">
+                <label for="card-number">Credit Card Number</label>
+                <input type="text" id="card-name" class="form-control" required>
+           </div>
+      </div> 
+       <div class="col-xs-12">
+           <div class="form-group">
+                <label for="card-name">Cart Holder Name</label>
+                <input type="text" id="card-name" class="form-control" required>
+           </div>
+      </div> 
+       <div class="col-xs-12">
+        <div class="row">
+           <div class="col-xs-6">
+           <div class="form-group">
+                <label for="card-expiry-month">Expiration Month</label>
+                <input type="text" id="card-expiry-month" class="form-control" required>
+           </div>
+           </div>
+           <div class="col-xs-6">
+           <div class="form-group">
+                <label for="card-expiry-year">Cart Holder Name</label>
+                <input type="text" id="card-expiry-year" class="form-control" required>
+           </div>
+           </div>
+      </div>
+    </div> <div class="col-xs-6">
+           <div class="form-group">
+                <label for="card-cvcr">CVC</label>
+                <input type="text" id="card-cvc" class="form-control" required>
+           </div>
+           </div>
+      </div>
+        <a href="/Logout" class="btn btn-success">Buy</button>
+ 
+
+      </form>
+</div>
+</div>
+
+<script src="/public/x.js"></script>
+<% include partials/footer %> 

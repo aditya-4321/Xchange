@@ -1,0 +1,49 @@
+<% include partials/header %>
+
+
+    
+<div class="container" ">
+<div class="container">
+<ul class="nav navbar-nav" style="max-height: 40px ;margin:0 auto">
+      <li><a href="£"  style="margin-right: 70px">fashion</a></li>
+      <li><a href="#"  style="margin-right: 70px">Electronics and appliances </a></li>
+      <li><a href="#"  style="margin-right: 70px">Mosic,Movies and video games</a></li>
+      <li><a href="#"  style="margin-right: 70px">Books</a></li>
+      <li><a href="#"  style="margin-right: 70px">Global Store.</a></li>
+    </ul>
+</div>
+      
+
+	            <div class="container" >
+	                        <h1>Products</h1>
+	                 <% for(i=0;i<cart.length;i++){ %>       
+	                       <div class="row" style="display:flex; flex-wrap: wrap;"> 
+	               <% cart[i].forEach(function(product){ %>
+	                       
+			                <div class="col-lg-3 col-md-3 "	 >
+			                <div class="thumbnail">
+			                 <a href="products/<%= product._id %>"  style="margin:20px">
+							 <img src="<%= product.img %>" class="image-responsive"style="
+																  height: 180px;
+																  background-size: cover;
+																  background-position: center">
+						<div class="caption">
+							<h3 style="color:black"><%= product.title %></h3>
+							 <p style="color:#909090"><%= product.desp %></p>
+						<div class="clearfix">
+							<div class="pull-left" style="font-weight:bold;font-size:25px;color:black"><%=product.price%>$</div>
+							<a href="/add-to-cart/<%= product._id%>" class="btn btn-success btn-lg pull-right">Add to Cart</a>
+						</div>		
+				</a>
+				</div>
+			                </div> 
+			              </div>
+			                <% }) %>
+			                </div>  
+			                <% } %>
+			                </div>
+			                </div>
+
+ 
+			              
+<% include partials/footer %>
