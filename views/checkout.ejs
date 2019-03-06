@@ -3,15 +3,16 @@
 		<div style="text-align:center">
 			<h1 id="title">Transactions</h1>
 	
-	<h3 id="description">Total:<%= total %>
-	</h3>
+	<h3 id="description">Total:<%= total %></h3>
+	<div id="charge-error" class="alert alert-danger hidden"></div>
+	
 </div>
 
 <div class="row">
     <div class="col-sm-6 col-md-6 col-md-offset-4 col-sm-offser-3">
       <h1>Checkout</h1>
       <h4>Total</h4>
-      <form action="/" method="GET" id="checkout-form">
+      <form action="/checkout" method="POST" id="checkout-form">
         <div class="row">
         <div class="col-xs-12">
            <div class="form-group">
@@ -26,19 +27,19 @@
            </div>
       </div>
       <hr>
-        
         <div class="col-xs-12">
-           <div class="form-group">
-                <label for="card-number">Credit Card Number</label>
-                <input type="text" id="card-name" class="form-control" required>
-           </div>
-      </div> 
-       <div class="col-xs-12">
            <div class="form-group">
                 <label for="card-name">Cart Holder Name</label>
                 <input type="text" id="card-name" class="form-control" required>
            </div>
       </div> 
+        <div class="col-xs-12">
+           <div class="form-group">
+                <label for="card-number">Credit Card Number</label>
+                <input type="text" id="card-number" class="form-control" required>
+           </div>
+      </div> 
+       
        <div class="col-xs-12">
         <div class="row">
            <div class="col-xs-6">
@@ -49,24 +50,28 @@
            </div>
            <div class="col-xs-6">
            <div class="form-group">
-                <label for="card-expiry-year">Cart Holder Name</label>
+                <label for="card-expiry-year">Expiration year</label>
                 <input type="text" id="card-expiry-year" class="form-control" required>
            </div>
            </div>
       </div>
-    </div> <div class="col-xs-6">
+    </div> <div class="col-xs-12">
            <div class="form-group">
-                <label for="card-cvcr">CVC</label>
+                <label for="card-cvc">CVC</label>
                 <input type="text" id="card-cvc" class="form-control" required>
            </div>
            </div>
       </div>
-        <a href="/Logout" class="btn btn-success">Buy</button>
+        <button type="submit" class="btn btn-primary btn-lg">Buy</button>
  
 
       </form>
 </div>
 </div>
 
-<script src="/public/x.js"></script>
+
+<script src="https://js.stripe.com/v2/"></script>
+
+<script src="/checkout.js"></script>
+
 <% include partials/footer %> 
