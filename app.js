@@ -12,11 +12,10 @@ var express = require("express"),
     LocalStrategy=require("passport-local").Strategy,
     passportLocalMongoose=require("passport-local-mongoose"),
     Cart= require("./models/cart")
-    
-    
-    
-mongoose.connect("mongodb://localhost/x_change");
-seedDB()
+//mongodb://localhost/x_change    
+//mongodb://AdiSpace:asdfghjkl@123@ds247852.mlab.com:47852/xchange    
+mongoose.connect("mongodb://aditya:ninja123@ds247852.mlab.com:47852/xchange");
+//seedDB()
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"))
