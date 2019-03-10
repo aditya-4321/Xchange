@@ -4,17 +4,15 @@
   "description": "multipurpose ecommerce website.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node app.js"
   },
   "author": "Aditya Singh Tomar",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
-<<<<<<< HEAD
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.3",
-=======
->>>>>>> e91cfe6440f0616f8faf478c84a7c6b9445c8b4a
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
