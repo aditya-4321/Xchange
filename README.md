@@ -12,5 +12,5 @@ Authentication using Passport.js.
 Api:Stripe Api is used for making charges.
 
 Future endeavours:
-Adding user authorisation.
-crpf protection.
+Adding user authorisation,
+csrf protection.
