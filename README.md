@@ -1,5 +1,6 @@
 # Xchange
-An ecommerce website built using restfull convention with mongodb and node.js at the backend.
+An ecommerce website built using restful convention.
+
 Front End Stack: Html5/Css3/Bootstrap/Jquery
 Backend Stack:Node.js.
 Database is handled using MongoDb.
