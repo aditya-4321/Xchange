@@ -12,9 +12,9 @@ var express = require("express"),
     LocalStrategy=require("passport-local").Strategy,
     passportLocalMongoose=require("passport-local-mongoose"),
     Cart= require("./models/cart")
-//mongodb://localhost/x_change    
-//mongodb://AdiSpace:asdfghjkl@123@ds247852.mlab.com:47852/xchange    
-mongoose.connect("mongodb://aditya:ninja123@ds247852.mlab.com:47852/xchange");
+//   
+//mongodb://aditya:ninja123@ds247852.mlab.com:47852/xchange   
+mongoose.connect("mongodb://localhost/x_change");
 //seedDB()
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended: true}));
@@ -56,7 +56,7 @@ app.get("/products",function(req, res){
         if(err){
             console.log(err);
         }
-        console.log(allproducts);
+       // console.log(allproducts);
         var productgrp=[];
         var productcount=4;
         
@@ -73,10 +73,10 @@ app.get("/products",function(req, res){
  })
 
 app.post("/products",function(req, res){
-    var title=req.body.title;
-    var image=req.body.image;
-    
-    var newproduct={title: title,img:image}
+    // var title=req.body.title;
+    // var image=req.body.image;
+    var newproduct=req.body.product;
+    // var newproduct=product;
     
     product.create(newproduct,function(err, Product){
         if(err){
@@ -111,10 +111,10 @@ app.get("/add-to-cart/:id",function(req, res){
         if(err){
             return res.redirect('/')
         }
-        cart.add(product)
+        cart.add(product,productId)
         
         req.session.cart = cart;
-        console.log(req.session.cart)
+        //console.log(req.session.cart)
         res.redirect('/')
     })
 })
@@ -124,6 +124,7 @@ app.get("/shopping-cart",function(req, res){
       return res.render('shoppingcart',{products:null})
   }
   var cart =new Cart(req.session.cart);
+  console.log(cart);
   res.render('shoppingcart',{products: cart.generateArray(),totalPrice:cart.totalPrice})
     
  

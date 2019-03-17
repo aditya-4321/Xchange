@@ -4,7 +4,7 @@ function cart(oldcart){
     this.totalPrice=oldcart.totalPrice || 0;
     
     this.add =function(item, id){
-        var storeditem = this.items[id];
+        var storeditem =this.items[id];
         if(!storeditem){
             storeditem= this.items[id] = {item: item, qty:0,price: 0};
         }
