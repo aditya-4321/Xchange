@@ -11,11 +11,12 @@ var express = require("express"),
     passport=require("passport"),
     LocalStrategy=require("passport-local").Strategy,
     passportLocalMongoose=require("passport-local-mongoose"),
-    Cart= require("./models/cart")
+    Cart= require("./models/cart"),
+    Order=require("./models/order")
 //   
 //mongodb://aditya:ninja123@ds247852.mlab.com:47852/xchange   
 mongoose.connect("mongodb://localhost/x_change");
-//seedDB()
+seedDB()
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"))
@@ -129,7 +130,7 @@ app.get("/shopping-cart",function(req, res){
     
  
 })
-app.get("/checkout",function(req, res){
+app.get("/checkout",isLoggedIn,function(req, res){
   if(!req.session.cart){
      res.redirect("/shopping-cart")
   }
@@ -139,7 +140,42 @@ app.get("/checkout",function(req, res){
  
 })
 
-
+app.post("/checkout",isLoggedIn,function(req, res){
+    if(!req.session.cart){
+     res.redirect("/shopping-cart")
+  }
+     var cart =new Cart(req.session.cart);
+     var stripe = require("stripe")("sk_test_NfgFXY21RkHivlsD6rrBpnvD");
+     stripe.charges.create({
+                amount: cart.totalPrice*100,
+                currency: "usd",
+                source: req.body.stripeToken, // obtained with Stripe.js
+                description: "Test Charge for learning Stripe"
+}, function(err, charge) {
+  if(err){
+      console.log("err is here"+err)
+      return res.redirect("/checkout")
+  }else{
+          var order=new Order({
+          user:req.user,
+          cart:cart,
+          address:req.body.address,
+          name:req.body.name,
+          paymentId:charge.id
+          
+      })
+      order.save(function(err, result){
+          if(err){
+              console.log(err)
+          }
+           console.log("success")
+            req.session.cart=null;
+           res.redirect("/userprofile")
+      })
+     
+  }
+});
+})
 
 
 
@@ -212,6 +248,28 @@ app.get("/Logout",function(req, res){
     res.redirect("/products");
 })
 
+app.get("/userprofile",isLoggedIn,function(req, res){
+    Order.find({user:req.user}, function(err, orders){
+        if(err){
+            return res.write("Error")
+        }
+        var cart;
+        orders.forEach(function(order){
+            cart=new Cart(order.cart)
+            order.items=cart.generateArray()
+           
+        })
+         res.render("userprofile",{orders: orders})
+    })
+    
+})
+function isLoggedIn(req, res, next){
+    console.log("running");
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/Login")
+}
 
 
 

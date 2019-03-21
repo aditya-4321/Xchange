@@ -1,0 +1,31 @@
+<% include partials/header %> 
+<div class="container" align=center>
+<div class="row" style="margin-top:70px" >
+    <div class="col-md-8 col-md-offser-2" >
+        <h1>User Profile</h1>
+        <hr>
+        <h2>My Orders</h2>
+      <%  orders.forEach(function(order){ %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="list-group">
+               
+        <%  for(var i=0;i<order.items.length;i++){ %>
+                <li class="list-group-item">
+                        <span class="badge">
+                                <%=order.items[i].price %>
+                        </span>
+                      
+                        </li>
+                 
+           <%    }%>
+        
+ </ul>
+ </div>
+ <div class="panel-footer">$<%= order.cart.totalPrice %></div>
+</div>
+<% }) %>
+    </div>
+</div>
+</div>
+<% include partials/footer %> 
