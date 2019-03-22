@@ -1,5 +1,5 @@
 <% include partials/header %>
-<div class="container">
+<div class="container" style="margin-top:70px">
 <h1><%=product.title%></h1>
  <img src="<%= product.img %>" ;
 																  height: 200px;
@@ -7,6 +7,7 @@
 																  background-position: center">
 							<h3><%= product.title %></h3>
 							 <p><%= product.desp %></p>
+							 	<a href="/products/<%= product._id %>/edit" class="btn btn-warning " style="float:left;margin-right:3px">Edit Campground</a>
 							 <form action="/products/<%= product._id%>?_method=DELETE"   method="POST">
 	    <button class="btn btn-danger">Delete</button>
 	</form>
