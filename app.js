@@ -12,14 +12,18 @@ var express = require("express"),
     LocalStrategy=require("passport-local").Strategy,
     passportLocalMongoose=require("passport-local-mongoose"),
     Cart= require("./models/cart"),
-    Order=require("./models/order")
+    Order=require("./models/order"),
+    flash=require("connect-flash"),
+    methodOverride=require("method-override")
 //   
-//mongodb://aditya:ninja123@ds247852.mlab.com:47852/xchange   
+ 
 mongoose.connect("mongodb://localhost/x_change");
+//mongoose.connect("mongodb://aditya:ninja123@ds221416.mlab.com:21416/xchange");
 seedDB()
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + "/public"))
+app.use(methodOverride("_method"));
 //Passport Configuration
 app.use(cookieParser())
 app.use(session({
@@ -33,16 +37,19 @@ app.use(express.static("public"))
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(user.authenticate()))
+
+app.use(flash());
 app.use(function(req, res, next){
     res.locals.login = req.isAuthenticated();
     res.locals.session = req.session;
     res.locals.currentUser= req.user;
+    res.locals.error=req.flash("error");
+    res.locals.success=req.flash("success");
     next();
 })
 
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
-
 
 
 
@@ -74,7 +81,7 @@ app.get("/products",function(req, res){
    
  })
 
-app.post("/products",function(req, res){
+app.post("/products",isLoggedIn,function(req, res){
     // var title=req.body.title;
     // var image=req.body.image;
     var newproduct=req.body.product;
@@ -85,13 +92,14 @@ app.post("/products",function(req, res){
             console.log("Not worked");
             console.log(err);
         }
+        req.flash("success","Successfully created a Product")
         res.redirect("/products");
     })
     
     
 })
 
-app.get("/products/new",function(req, res) {
+app.get("/products/new",isLoggedIn,function(req, res) {
     res.render("new.ejs");
 })
 
@@ -104,8 +112,41 @@ app.get("/products/:id",function(req, res) {
         res.render("show",{product:foundproduct})
     })
 })
-
-app.get("/add-to-cart/:id",function(req, res){
+//edit
+app.get("/products/:id/edit",function(req, res) {
+                product.findById(req.params.id, function(err, product){
+                    if(err){
+                        req.flash("error","Campground not Found")
+                        res.redirect("back")
+                    }   
+                        
+                            res.render("edit",{product: product})
+                     })
+})
+//Update
+app.put("/products/:id",function(req, res){
+    product.findByIdAndUpdate(req.params.id , req.body.product, function(err, updatedproduct){
+        if(err){
+            req.flash("error","product not Found")
+            res.redirect("/products")
+        } else {
+            req.flash("success","Update product")
+            res.redirect("/products/"+req.params.id)
+        }
+    })
+})
+//Delete
+app.delete("/products/:id",function(req, res){
+    product.findByIdAndRemove(req.params.id,function(err){
+        if(err){
+            res.redirect("/products")
+        } else{
+            req.flash("success","Deleted product")
+            res.redirect("/products")
+        }
+    })
+})
+app.get("/add-to-cart/:id",isLoggedIn,function(req, res){
     var productId=req.params.id;
     var cart= new Cart(req.session.cart ? req.session.cart : {})
     
@@ -121,7 +162,7 @@ app.get("/add-to-cart/:id",function(req, res){
     })
 })
 
-app.get("/shopping-cart",function(req, res){
+app.get("/shopping-cart",isLoggedIn,function(req, res){
   if(!req.session.cart){
       return res.render('shoppingcart',{products:null})
   }
@@ -216,6 +257,7 @@ app.get("/Login",function(req, res){
 
 //middleware
 app.post("/Login",passport.authenticate("local",{
+    
     successRedirect: "/products",
     failureRedirect: "/Login"
 }),function(req, res){
@@ -227,6 +269,7 @@ app.get("/Logout",function(req, res){
     req.logout();
     
     req.session.cart=null;
+    req.flash("success","Successfully Logged out")
     res.redirect("/products");
 })
 
@@ -253,6 +296,7 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    req.flash("error","Please Login First")
     res.redirect("/Login")
 }
 

@@ -64,7 +64,14 @@
 		</div>
 	</div>
 		</nav>
-
+		<div class="container" style="margin-top:70px">	
+		<% if(error && error.length){ %>
+		<div class="alert alert-danger" role="alert"><%= error %></div>	
+		<% } %>
+		<% if(success && success.length){ %>
+			<div class="alert alert-success" role="alert"><%= success %></div>
+		<% } %>
+	</div>
 
 
 

@@ -7,6 +7,9 @@
 																  background-position: center">
 							<h3><%= product.title %></h3>
 							 <p><%= product.desp %></p>
+							 <form action="/products/<%= product._id%>?_method=DELETE"   method="POST">
+	    <button class="btn btn-danger">Delete</button>
+	</form>
 	</div>						 
 							 
 <% include partials/footer %>
