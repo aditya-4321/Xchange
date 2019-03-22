@@ -207,25 +207,6 @@ app.post("/register",function(req , res){
 //store routes
 
 
-app.get("/fashion",function(req, res){
-    res.render("fashion")
-})
-
-app.get("/electronics",function(req, res){
-   res.render("electronics")
-})
-
-app.get("/games",function(req, res){
-   res.render("games")
-})
-
-app.get("/books",function(req, res){
-   res.render("books")
-})
-
-app.get("/global",function(req, res){
-   res.render("global")
-})
 
 //login
 //Auth routes Login

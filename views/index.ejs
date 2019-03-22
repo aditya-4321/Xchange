@@ -16,7 +16,7 @@
 
 	            <div class="container" style="margin-top:70px">
 	            <div><h1>Products</h1>
-	            	<span><a href="/products/new">Add Product</a></span>
+	            	<span><a href="/products/new" id="b" class="btn success" style="margin:4px">Add Product</a></span>
 	            </div>
 	                        
 	                 <% for(i=0;i<allproducts.length;i++){ %>       
@@ -35,7 +35,7 @@
 							 <p style="color:#909090"><%= product.desp %></p>
 						<div class="clearfix">
 							<div class="pull-left" style="font-weight:bold;font-size:25px;color:black"><%=product.price%>$</div>
-							<a href="/add-to-cart/<%= product._id%>" class="btn btn-success btn-lg pull-right">Add to Cart</a>
+							<a href="/add-to-cart/<%= product._id%>" class="btn btn-info btn-lg pull-right">Add to Cart</a>
 						</div>		
 				</a>
 				</div>

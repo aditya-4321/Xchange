@@ -1,0 +1,15 @@
+#brand:hover { 
+  text-transform: uppercase;
+}
+
+#b {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 7px 14px;
+  font-size: 16px;
+  cursor: pointer;
+   border-color: #ff9800;
+  color: orange;
+}
+
