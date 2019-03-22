@@ -35,20 +35,24 @@
 	  
 		</div>
 		<div class="collapse navbar-collapse" id="bs">
-		<ul class="nav navbar-nav">
-			<li><a href="#"	style="color: white">About</a></a>
+		<!--<ul class="nav navbar-nav">-->
+		<!--	<li><a href="/about"	style="color: white">About</a></a>-->
 			
-		</ul>
+		<!--</ul>-->
 		<ul class="nav navbar-nav navbar-right">
+			<% if(!currentUser){ %>
 			<li><a href="/register"	style="color: white">Sign Up</a></a>
 			<li><a href="/Login"	style="color: white">Login</a></a>
+			<% } else { %>
+			<li><a href="/logout" style="color: white">Logout</a></li>
+			<% } %>
 			<% if( session.cart!=null){%>
 			<li><a href="shopping-cart"	style="color: white"><i class="fas fa-shopping-cart"></i> Cart <span class="badge"><%= session.cart.totalQty%></span> </a>
 			<% } %>
 			<% if(session.cart==null) { %>
 			<li><a href="shopping-cart"	style="color: white"><i class="fas fa-shopping-cart"></i> Cart </a></li>
 			<% } %>
-			<li><a href="/logout" style="color: white">Logout</a></li>
+			
 
 		</ul>
 		<!--<form class="navbar-form navbar-left" role="search" style="width:30%">-->

@@ -36,6 +36,7 @@ passport.use(new LocalStrategy(user.authenticate()))
 app.use(function(req, res, next){
     res.locals.login = req.isAuthenticated();
     res.locals.session = req.session;
+    res.locals.currentUser= req.user;
     next();
 })
 
@@ -262,6 +263,9 @@ app.get("/userprofile",isLoggedIn,function(req, res){
          res.render("userprofile",{orders: orders})
     })
     
+})
+app.get("/about",function(req, res){
+    res.render("about")
 })
 function isLoggedIn(req, res, next){
     console.log("running");
