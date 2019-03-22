@@ -16,8 +16,9 @@ var express = require("express"),
     flash=require("connect-flash"),
     methodOverride=require("method-override")
 //   
- 
-mongoose.connect("mongodb://localhost/x_change");
+var url=process.env.DATABASEURL || "mongodb://localhost/x_change";
+mongoose.connect(url);
+
 //mongoose.connect("mongodb://aditya:ninja123@ds221416.mlab.com:21416/xchange");
 seedDB()
 app.set("view engine","ejs");
